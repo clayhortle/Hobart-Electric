@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hobart Electric — Licensed Electricians, Southern Tasmania</title>
+  <meta name="description" content="Hobart Electric delivers professional electrical services across Southern Tasmania. Trusted by homeowners, builders and businesses since day one." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink:    '#161C24',
+            navy:   '#1A2B3C',
+            gold:   '#C8881F',
+            sand:   '#F5F0E8',
+            mist:   '#EEF1F4',
+            slate:  '#5A6E7F',
+            rule:   '#DDE2E7',
+          },
+          fontFamily: {
+            serif: ['"DM Serif Display"', 'Georgia', 'serif'],
+            sans:  ['"DM Sans"', 'system-ui', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', system-ui, sans-serif; color: #161C24; background: #fff; -webkit-font-smoothing: antialiased; }
+
+    /* ── NAV ── */
+    #site-nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      transition: background 0.4s ease, border-color 0.4s ease;
+      border-bottom: 1px solid transparent;
+    }
+    #site-nav.solid {
+      background: #161C24;
+      border-color: rgba(255,255,255,0.07);
+    }
+
+    /* ── HERO ── */
+    .hero-wrap {
+      min-height: 100svh;
+      background: #161C24;
+      display: grid;
+      grid-template-rows: 1fr auto;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-img {
+      position: absolute; inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1416331108676-a22ccb276e35?w=1600&q=75');
+      background-size: cover;
+      background-position: center 40%;
+      opacity: 0.18;
+    }
+    /* Signature element: a single vertical gold rule that anchors the layout */
+    .v-rule {
+      display: inline-block;
+      width: 1px;
+      background: #C8881F;
+      height: 56px;
+      vertical-align: middle;
+    }
+
+    /* ── SECTIONS ── */
+    .section-label {
+      display: flex; align-items: center; gap: 14px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.72rem; font-weight: 500;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: #C8881F;
+    }
+    .section-label::after {
+      content: '';
+      display: block; flex: 1 0 24px; max-width: 40px;
+      height: 1px; background: #C8881F; opacity: 0.5;
+    }
+
+    /* ── SERVICE ITEMS ── */
+    .svc-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      padding: 28px 0;
+      border-bottom: 1px solid #DDE2E7;
+      gap: 16px;
+      transition: background 0.2s;
+      cursor: default;
+    }
+    .svc-row:first-child { border-top: 1px solid #DDE2E7; }
+    .svc-arrow {
+      width: 36px; height: 36px;
+      border: 1px solid #DDE2E7;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: #C8881F;
+      flex-shrink: 0;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .svc-row:hover .svc-arrow { background: #C8881F; border-color: #C8881F; color: #fff; }
+    .svc-row:hover .svc-name { color: #C8881F; }
+    .svc-name { transition: color 0.2s; }
+
+    /* ── PROJECT GRID ── */
+    .proj-img {
+      aspect-ratio: 3/2;
+      overflow: hidden;
+      border-radius: 4px;
+    }
+    .proj-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; display: block; }
+    .proj-img:hover img { transform: scale(1.04); }
+
+    /* ── FORM ── */
+    .field {
+      display: flex; flex-direction: column; gap: 6px;
+    }
+    .field label { font-size: 0.8rem; font-weight: 500; letter-spacing: 0.04em; color: #5A6E7F; }
+    .field input, .field textarea, .field select {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem; color: #161C24;
+      border: 1px solid #DDE2E7;
+      border-radius: 4px;
+      padding: 13px 16px;
+      outline: none;
+      transition: border-color 0.2s;
+      background: #fff;
+      width: 100%;
+    }
+    .field input:focus, .field textarea:focus { border-color: #C8881F; }
+    .field input::placeholder, .field textarea::placeholder { color: #A0AEBA; }
+
+    /* ── AREA PILLS ── */
+    .area-pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 8px 16px;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 100px;
+      font-size: 0.85rem; font-weight: 400;
+      color: rgba(255,255,255,0.7);
+    }
+    .area-pill.highlight {
+      border-color: rgba(200,136,31,0.4);
+      color: #C8881F;
+    }
+
+    /* ── FADE ANIMATIONS ── */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-d1 { transition-delay: 0.1s; }
+    .reveal-d2 { transition-delay: 0.2s; }
+    .reveal-d3 { transition-delay: 0.3s; }
+    @media (prefers-reduced-motion: reduce) { .reveal { opacity:1; transform:none; transition:none; } }
+
+    /* ── QUOTE SECTION ── */
+    .quote-section { background: #F5F0E8; }
+
+    /* ── MOBILE NAV ── */
+    #mob-menu { display: none; }
+    #mob-menu.open { display: flex; }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════
+  NAV
+════════════════════════════════════ -->
+<header id="site-nav">
+  <div style="max-width:1200px; margin:0 auto; padding:0 32px; display:flex; align-items:center; justify-content:space-between; height:72px;">
+
+    <!-- Wordmark (logo placeholder) -->
+    <a href="#" aria-label="Hobart Electric" style="display:flex; flex-direction:column; line-height:1; text-decoration:none; gap:2px;">
+      <span style="font-family:'DM Sans',sans-serif; font-weight:600; font-size:1.05rem; letter-spacing:0.08em; color:#fff; text-transform:uppercase;">Hobart</span>
+      <span style="font-family:'DM Sans',sans-serif; font-weight:300; font-size:0.62rem; letter-spacing:0.28em; color:#C8881F; text-transform:uppercase;">Electric</span>
+    </a>
+
+    <!-- Desktop links -->
+    <nav style="display:flex; align-items:center; gap:36px;" class="hidden md:flex" aria-label="Main navigation">
+      <a href="#services" style="font-size:0.85rem; font-weight:400; color:rgba(255,255,255,0.65); text-decoration:none; letter-spacing:0.02em; transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.65)'">Services</a>
+      <a href="#about" style="font-size:0.85rem; font-weight:400; color:rgba(255,255,255,0.65); text-decoration:none; letter-spacing:0.02em; transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.65)'">About</a>
+      <a href="#projects" style="font-size:0.85rem; font-weight:400; color:rgba(255,255,255,0.65); text-decoration:none; letter-spacing:0.02em; transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.65)'">Projects</a>
+      <a href="#areas" style="font-size:0.85rem; font-weight:400; color:rgba(255,255,255,0.65); text-decoration:none; letter-spacing:0.02em; transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.65)'">Areas</a>
+      <a href="tel:0362310000" style="font-size:0.85rem; font-weight:500; color:rgba(255,255,255,0.65); text-decoration:none; letter-spacing:0.02em; transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.65)'">(03) 6231 0000</a>
+      <a href="#quote" style="font-size:0.82rem; font-weight:500; color:#fff; background:#C8881F; padding:10px 22px; border-radius:3px; text-decoration:none; letter-spacing:0.04em; transition:background 0.2s;" onmouseover="this.style.background='#D9981F'" onmouseout="this.style.background='#C8881F'">Get a Quote</a>
+    </nav>
+
+    <!-- Mobile hamburger -->
+    <button id="mob-toggle" class="md:hidden" style="background:none;border:none;cursor:pointer;padding:6px;" aria-label="Open menu">
+      <svg width="22" height="16" viewBox="0 0 22 16" fill="none"><rect width="22" height="1.8" rx="0.9" fill="white"/><rect y="7" width="22" height="1.8" rx="0.9" fill="white"/><rect y="14" width="22" height="1.8" rx="0.9" fill="white"/></svg>
+    </button>
+  </div>
+
+  <!-- Mobile menu -->
+  <div id="mob-menu" style="background:#161C24; border-top:1px solid rgba(255,255,255,0.07); flex-direction:column; padding:24px 32px 32px;" class="md:hidden">
+    <a href="#services" style="color:rgba(255,255,255,0.7); text-decoration:none; font-size:0.9rem; padding:10px 0; border-bottom:1px solid rgba(255,255,255,0.06);" onclick="closeMob()">Services</a>
+    <a href="#about" style="color:rgba(255,255,255,0.7); text-decoration:none; font-size:0.9rem; padding:10px 0; border-bottom:1px solid rgba(255,255,255,0.06);" onclick="closeMob()">About</a>
+    <a href="#projects" style="color:rgba(255,255,255,0.7); text-decoration:none; font-size:0.9rem; padding:10px 0; border-bottom:1px solid rgba(255,255,255,0.06);" onclick="closeMob()">Projects</a>
+    <a href="#areas" style="color:rgba(255,255,255,0.7); text-decoration:none; font-size:0.9rem; padding:10px 0; border-bottom:1px solid rgba(255,255,255,0.06);" onclick="closeMob()">Areas</a>
+    <a href="tel:0362310000" style="color:rgba(255,255,255,0.7); text-decoration:none; font-size:0.9rem; padding:10px 0; border-bottom:1px solid rgba(255,255,255,0.06);">(03) 6231 0000</a>
+    <a href="#quote" style="margin-top:16px; background:#C8881F; color:#fff; text-align:center; padding:14px; border-radius:3px; text-decoration:none; font-size:0.9rem; font-weight:500;" onclick="closeMob()">Get a Quote</a>
+  </div>
+</header>
+
+
+<!-- ════════════════════════════════════
+  HERO
+════════════════════════════════════ -->
+<section class="hero-wrap">
+  <div class="hero-img" aria-hidden="true"></div>
+
+  <!-- Main hero content -->
+  <div style="max-width:1200px; margin:0 auto; padding:0 32px; display:flex; align-items:center; padding-top:72px; position:relative; z-index:2;">
+    <div style="max-width:760px; padding:80px 0 60px;">
+
+      <!-- Eyebrow -->
+      <div class="section-label" style="color:rgba(200,136,31,0.9); margin-bottom:36px; font-size:0.7rem;">
+        Southern Tasmania
+      </div>
+
+      <!-- Headline — the signature typographic moment -->
+      <h1 style="font-family:'DM Serif Display', Georgia, serif; font-size:clamp(3rem, 7vw, 5.8rem); line-height:1.02; color:#fff; font-weight:400; margin-bottom:36px;">
+        Electrical work<br/>
+        <span style="font-style:italic; color:#C8881F;">done properly.</span>
+      </h1>
+
+      <p style="font-size:clamp(1rem, 1.8vw, 1.2rem); line-height:1.75; color:rgba(255,255,255,0.6); max-width:480px; margin-bottom:52px; font-weight:300;">
+        Professional electrical services for homes, businesses, rural properties and holiday rentals across Southern Tasmania.
+      </p>
+
+      <div style="display:flex; flex-wrap:wrap; gap:12px; align-items:center;">
+        <a href="#quote" style="display:inline-block; background:#C8881F; color:#fff; padding:16px 32px; border-radius:3px; font-size:0.88rem; font-weight:500; letter-spacing:0.05em; text-decoration:none; transition:background 0.2s;">
+          Request a Quote
+        </a>
+        <a href="tel:0362310000" style="display:inline-flex; align-items:center; gap:10px; color:rgba(255,255,255,0.7); text-decoration:none; font-size:0.88rem; padding:16px 20px; border:1px solid rgba(255,255,255,0.15); border-radius:3px; transition:border-color 0.2s, color 0.2s;">
+          <svg width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M3 3.5C3 2.67 3.67 2 4.5 2h2.13a.5.5 0 01.49.38l1 4a.5.5 0 01-.14.49L6.6 8.2a10.58 10.58 0 004.2 4.2l1.33-1.38a.5.5 0 01.49-.14l4 1a.5.5 0 01.38.49V14.5A2.5 2.5 0 0114.5 17C8.15 17 3 11.85 3 5.5v-2z"/></svg>
+          (03) 6231 0000
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero footer strip -->
+  <div style="position:relative; z-index:2; border-top:1px solid rgba(255,255,255,0.08); padding:24px 32px;">
+    <div style="max-width:1200px; margin:0 auto; display:flex; flex-wrap:wrap; gap:32px; align-items:center;">
+      <div style="display:flex; align-items:center; gap:10px; color:rgba(255,255,255,0.45); font-size:0.78rem; letter-spacing:0.05em;">
+        <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="#C8881F" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M5 10l3.5 3.5L15 7"/></svg>
+        Licensed &amp; Insured
+      </div>
+      <div style="display:flex; align-items:center; gap:10px; color:rgba(255,255,255,0.45); font-size:0.78rem; letter-spacing:0.05em;">
+        <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="#C8881F" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M5 10l3.5 3.5L15 7"/></svg>
+        Locally Owned
+      </div>
+      <div style="display:flex; align-items:center; gap:10px; color:rgba(255,255,255,0.45); font-size:0.78rem; letter-spacing:0.05em;">
+        <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="#C8881F" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M5 10l3.5 3.5L15 7"/></svg>
+        Quality Guaranteed
+      </div>
+      <div style="display:flex; align-items:center; gap:10px; color:rgba(255,255,255,0.45); font-size:0.78rem; letter-spacing:0.05em;">
+        <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="#C8881F" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M5 10l3.5 3.5L15 7"/></svg>
+        Trusted by TasNetworks, Hobart Airport, TDT
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════
+  INTRO / POSITIONING
+════════════════════════════════════ -->
+<section style="background:#fff; padding:120px 32px;">
+  <div style="max-width:1200px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:start;" class="reveal">
+
+    <div>
+      <div class="section-label" style="margin-bottom:28px;">About Hobart Electric</div>
+      <h2 style="font-family:'DM Serif Display',Georgia,serif; font-size:clamp(2rem, 3.5vw, 2.8rem); line-height:1.15; font-weight:400; color:#161C24; margin-bottom:0;">
+        Trusted electrical contractors,<br/>
+        <span style="font-style:italic;">right here in Tasmania.</span>
+      </h2>
+    </div>
+
+    <div style="padding-top:8px;">
+      <p style="font-size:1.05rem; line-height:1.85; color:#5A6E7F; margin-bottom:28px; font-weight:300;">
+        Hobart Electric has built its reputation on a straightforward principle: do good work, communicate clearly, and treat every property as if it were our own.
+      </p>
+      <p style="font-size:1.05rem; line-height:1.85; color:#5A6E7F; font-weight:300;">
+        We work with homeowners, builders, business owners, rural property holders and holiday rental operators across the greater Southern Tasmania region. Every job — from a single power point to a full commercial fit-out — gets the same care and attention.
+      </p>
+
+      <div style="margin-top:48px; display:flex; gap:48px; flex-wrap:wrap;">
+        <div>
+          <div style="font-family:'DM Serif Display',Georgia,serif; font-size:2.6rem; color:#161C24; line-height:1;">15+</div>
+          <div style="font-size:0.8rem; color:#5A6E7F; margin-top:4px; letter-spacing:0.04em;">Years in Tasmania</div>
+        </div>
+        <div style="width:1px; background:#DDE2E7; align-self:stretch;"></div>
+        <div>
+          <div style="font-family:'DM Serif Display',Georgia,serif; font-size:2.6rem; color:#161C24; line-height:1;">500+</div>
+          <div style="font-size:0.8rem; color:#5A6E7F; margin-top:4px; letter-spacing:0.04em;">Projects completed</div>
+        </div>
+        <div style="width:1px; background:#DDE2E7; align-self:stretch;"></div>
+        <div>
+          <div style="font-family:'DM Serif Display',Georgia,serif; font-size:2.6rem; color:#161C24; line-height:1;">100%</div>
+          <div style="font-size:0.8rem; color:#5A6E7F; margin-top:4px; letter-spacing:0.04em;">Licensed &amp; insured</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════
+  SERVICES
+════════════════════════════════════ -->
+<section id="services" style="background:#F5F0E8; padding:120px 32px;">
+  <div style="max-width:1200px; margin:0 auto;">
+
+    <div style="display:grid; grid-template-columns:1fr 2fr; gap:80px; align-items:start; margin-bottom:64px;" class="reveal">
+      <div>
+        <div class="section-label" style="margin-bottom:28px;">What We Do</div>
+        <h2 style="font-family:'DM Serif Display',Georgia,serif; font-size:clamp(2rem,3.5vw,2.8rem); line-height:1.15; font-weight:400; color:#161C24;">
+          Services
+        </h2>
+      </div>
+      <div style="padding-top:52px;">
+        <p style="font-size:1rem; line-height:1.8; color:#5A6E7F; max-width:520px; font-weight:300;">
+          From residential wiring to commercial installations, EV charging and rural infrastructure — we handle it all with the same level of professionalism.
+        </p>
+      </div>
+    </div>
+
+    <!-- Service list rows -->
+    <div class="reveal reveal-d1">
+      <div class="svc-row">
+        <div>
+          <div class="svc-name" style="font-size:1.15rem; font-weight:500; color:#161C24; margin-bottom:4px;">Residential Electrical</div>
+          <div style="font-size:0.88rem; color:#5A6E7F; font-weight:300;">New homes, renovations, power points, safety switches and full rewires.</div>
+        </div>
+        <div class="svc-arrow" aria-hidden="true">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+      <div class="svc-row">
+        <div>
+          <div class="svc-name" style="font-size:1.15rem; font-weight:500; color:#161C24; margin-bottom:4px;">Commercial Electrical</div>
+          <div style="font-size:0.88rem; color:#5A6E7F; font-weight:300;">Shop fit-outs, office power, commercial lighting and data infrastructure.</div>
+        </div>
+        <div class="svc-arrow" aria-hidden="true">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+      <div class="svc-row">
+        <div>
+          <div class="svc-name" style="font-size:1.15rem; font-weight:500; color:#161C24; margin-bottom:4px;">EV Charger Installation</div>
+          <div style="font-size:0.88rem; color:#5A6E7F; font-weight:300;">Home and commercial EV charging — future-proof your property.</div>
+        </div>
+        <div class="svc-arrow" aria-hidden="true">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+      <div class="svc-row">
+        <div>
+          <div class="svc-name" style="font-size:1.15rem; font-weight:500; color:#161C24; margin-bottom:4px;">Switchboard Upgrades</div>
+          <div style="font-size:0.88rem; color:#5A6E7F; font-weight:300;">Modern safety switch panels replacing ageing boards to current standards.</div>
+        </div>
+        <div class="svc-arrow" aria-hidden="true">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+      <div class="svc-row">
+        <div>
+          <div class="svc-name" style="font-size:1.15rem; font-weight:500; color:#161C24; margin-bottom:4px;">Property Maintenance</div>
+          <div style="font-size:0.88rem; color:#5A6E7F; font-weight:300;">Ongoing electrical care for holiday rentals, Airbnb hosts and investment properties.</div>
+        </div>
+        <div class="svc-arrow" aria-hidden="true">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+      <div class="svc-row">
+        <div>
+          <div class="svc-name" style="font-size:1.15rem; font-weight:500; color:#161C24; margin-bottom:4px;">Rural Properties</div>
+          <div style="font-size:0.88rem; color:#5A6E7F; font-weight:300;">Sheds, pump systems, outbuildings and rural infrastructure across Southern Tasmania.</div>
+        </div>
+        <div class="svc-arrow" aria-hidden="true">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+      <div class="svc-row">
+        <div>
+          <div class="svc-name" style="font-size:1.15rem; font-weight:500; color:#161C24; margin-bottom:4px;">Lighting Design &amp; Installation</div>
+          <div style="font-size:0.88rem; color:#5A6E7F; font-weight:300;">LED upgrades, feature lighting, outdoor and landscape lighting.</div>
+        </div>
+        <div class="svc-arrow" aria-hidden="true">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+      <div class="svc-row">
+        <div>
+          <div class="svc-name" style="font-size:1.15rem; font-weight:500; color:#161C24; margin-bottom:4px;">Fault Finding &amp; Repairs</div>
+          <div style="font-size:0.88rem; color:#5A6E7F; font-weight:300;">Systematic diagnosis and repair — minimal disruption, lasting results.</div>
+        </div>
+        <div class="svc-arrow" aria-hidden="true">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════
+  WHY / TRUST
+════════════════════════════════════ -->
+<section id="about" style="background:#fff; padding:120px 32px;">
+  <div style="max-width:1200px; margin:0 auto;">
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:start; margin-bottom:80px;" class="reveal">
+      <div>
+        <div class="section-label" style="margin-bottom:28px;">Our Standard</div>
+        <h2 style="font-family:'DM Serif Display',Georgia,serif; font-size:clamp(2rem,3.5vw,2.8rem); line-height:1.15; font-weight:400; color:#161C24;">
+          The same standard,<br/>
+          <span style="font-style:italic;">every single job.</span>
+        </h2>
+      </div>
+      <div style="padding-top:52px;">
+        <p style="font-size:1rem; line-height:1.85; color:#5A6E7F; font-weight:300;">
+          Most trades businesses talk about quality. We prefer to demonstrate it through our work, our communication and the way we leave a site. That consistency is what brings clients back — and what makes them recommend us to their neighbours, builders and property managers.
+        </p>
+      </div>
+    </div>
+
+    <!-- Four pillars -->
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:1px; background:#DDE2E7; border:1px solid #DDE2E7;" class="reveal reveal-d1">
+      <div style="background:#fff; padding:48px 40px;">
+        <div style="font-size:0.72rem; font-weight:500; letter-spacing:0.14em; color:#C8881F; text-transform:uppercase; margin-bottom:20px;">Reliability</div>
+        <h3 style="font-family:'DM Serif Display',Georgia,serif; font-size:1.35rem; font-weight:400; color:#161C24; margin-bottom:16px;">We show up when we say we will.</h3>
+        <p style="font-size:0.9rem; line-height:1.75; color:#5A6E7F; font-weight:300;">Appointments kept. Timelines respected. You'll always know where the job stands.</p>
+      </div>
+      <div style="background:#fff; padding:48px 40px;">
+        <div style="font-size:0.72rem; font-weight:500; letter-spacing:0.14em; color:#C8881F; text-transform:uppercase; margin-bottom:20px;">Communication</div>
+        <h3 style="font-family:'DM Serif Display',Georgia,serif; font-size:1.35rem; font-weight:400; color:#161C24; margin-bottom:16px;">No chasing required.</h3>
+        <p style="font-size:0.9rem; line-height:1.75; color:#5A6E7F; font-weight:300;">Clear quotes before we start. Updates as we go. No surprises when the invoice arrives.</p>
+      </div>
+      <div style="background:#fff; padding:48px 40px;">
+        <div style="font-size:0.72rem; font-weight:500; letter-spacing:0.14em; color:#C8881F; text-transform:uppercase; margin-bottom:20px;">Workmanship</div>
+        <h3 style="font-family:'DM Serif Display',Georgia,serif; font-size:1.35rem; font-weight:400; color:#161C24; margin-bottom:16px;">Done to standard. Every time.</h3>
+        <p style="font-size:0.9rem; line-height:1.75; color:#5A6E7F; font-weight:300;">All work meets Australian Standards. We take pride in neat, professional results that last.</p>
+      </div>
+      <div style="background:#fff; padding:48px 40px;">
+        <div style="font-size:0.72rem; font-weight:500; letter-spacing:0.14em; color:#C8881F; text-transform:uppercase; margin-bottom:20px;">Local Knowledge</div>
+        <h3 style="font-family:'DM Serif Display',Georgia,serif; font-size:1.35rem; font-weight:400; color:#161C24; margin-bottom:16px;">We know Tasmanian properties.</h3>
+        <p style="font-size:0.9rem; line-height:1.75; color:#5A6E7F; font-weight:300;">Older wiring, coastal conditions, rural infrastructure — we plan for the realities of the properties we work on.</p>
+      </div>
+    </div>
+
+    <!-- Trusted by -->
+    <div style="margin-top:72px; padding-top:48px; border-top:1px solid #DDE2E7;" class="reveal reveal-d2">
+      <div style="font-size:0.72rem; font-weight:500; letter-spacing:0.14em; color:#5A6E7F; text-transform:uppercase; margin-bottom:24px;">Trusted by</div>
+      <div style="display:flex; flex-wrap:wrap; gap:12px; align-items:center;">
+        <span style="padding:10px 20px; border:1px solid #DDE2E7; border-radius:3px; font-size:0.85rem; color:#161C24; font-weight:400;">TasNetworks</span>
+        <span style="padding:10px 20px; border:1px solid #DDE2E7; border-radius:3px; font-size:0.85rem; color:#161C24; font-weight:400;">Hobart International Airport</span>
+        <span style="padding:10px 20px; border:1px solid #DDE2E7; border-radius:3px; font-size:0.85rem; color:#161C24; font-weight:400;">TDT</span>
+        <span style="padding:10px 20px; border:1px solid #DDE2E7; border-radius:3px; font-size:0.85rem; color:#161C24; font-weight:400;">Local Builders &amp; Architects</span>
+        <span style="padding:10px 20px; border:1px solid #DDE2E7; border-radius:3px; font-size:0.85rem; color:#161C24; font-weight:400;">Property Managers</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════
+  PROJECTS
+════════════════════════════════════ -->
+<section id="projects" style="background:#161C24; padding:120px 32px;">
+  <div style="max-width:1200px; margin:0 auto;">
+
+    <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:56px; flex-wrap:wrap; gap:24px;" class="reveal">
+      <div>
+        <div class="section-label" style="color:rgba(200,136,31,0.8); margin-bottom:24px;">Our Work</div>
+        <h2 style="font-family:'DM Serif Display',Georgia,serif; font-size:clamp(2rem,3.5vw,2.8rem); line-height:1.15; font-weight:400; color:#fff;">
+          Recent projects
+        </h2>
+      </div>
+      <a href="#quote" style="color:#C8881F; font-size:0.85rem; text-decoration:none; display:flex; align-items:center; gap:6px; letter-spacing:0.04em;">
+        Start your project
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+
+    <!-- Asymmetric gallery -->
+    <div style="display:grid; grid-template-columns:1fr 1fr 1fr; grid-template-rows:auto auto; gap:16px;" class="reveal reveal-d1">
+
+      <!-- Large left -->
+      <div style="grid-column:1/2; grid-row:1/3;">
+        <div class="proj-img" style="aspect-ratio:2/3;">
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=75" alt="Switchboard upgrade, Sandy Bay" loading="lazy" />
+        </div>
+        <div style="padding:18px 0 0;">
+          <div style="font-size:0.72rem; color:#C8881F; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:4px;">Switchboard</div>
+          <div style="font-size:0.95rem; color:#fff; font-weight:400;">Safety Switch Upgrade — Sandy Bay</div>
+        </div>
+      </div>
+
+      <!-- Top right two -->
+      <div>
+        <div class="proj-img">
+          <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=800&q=75" alt="EV charger installation, Kingston" loading="lazy" />
+        </div>
+        <div style="padding:14px 0 0;">
+          <div style="font-size:0.72rem; color:#C8881F; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:4px;">EV Charging</div>
+          <div style="font-size:0.88rem; color:#fff; font-weight:400;">Home Charger — Kingston</div>
+        </div>
+      </div>
+      <div>
+        <div class="proj-img">
+          <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=800&q=75" alt="Commercial fit-out, Hobart CBD" loading="lazy" />
+        </div>
+        <div style="padding:14px 0 0;">
+          <div style="font-size:0.72rem; color:#C8881F; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:4px;">Commercial</div>
+          <div style="font-size:0.88rem; color:#fff; font-weight:400;">Office Fit-Out — Hobart CBD</div>
+        </div>
+      </div>
+
+      <!-- Bottom right two -->
+      <div>
+        <div class="proj-img">
+          <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?w=800&q=75" alt="Feature lighting, Lauderdale" loading="lazy" />
+        </div>
+        <div style="padding:14px 0 0;">
+          <div style="font-size:0.72rem; color:#C8881F; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:4px;">Lighting</div>
+          <div style="font-size:0.88rem; color:#fff; font-weight:400;">Feature Lighting — Lauderdale</div>
+        </div>
+      </div>
+      <div>
+        <div class="proj-img">
+          <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=75" alt="Holiday property, Clifton Beach" loading="lazy" />
+        </div>
+        <div style="padding:14px 0 0;">
+          <div style="font-size:0.72rem; color:#C8881F; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:4px;">Holiday Property</div>
+          <div style="font-size:0.88rem; color:#fff; font-weight:400;">Airbnb Compliance — Clifton Beach</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════
+  SERVICE AREAS
+════════════════════════════════════ -->
+<section id="areas" style="background:#1A2B3C; padding:100px 32px;">
+  <div style="max-width:1200px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center;" class="reveal">
+    <div>
+      <div class="section-label" style="color:rgba(200,136,31,0.8); margin-bottom:28px;">Where We Work</div>
+      <h2 style="font-family:'DM Serif Display',Georgia,serif; font-size:clamp(2rem,3.5vw,2.8rem); line-height:1.15; font-weight:400; color:#fff; margin-bottom:28px;">
+        Southern Tasmania<br/>
+        <span style="font-style:italic;">and beyond.</span>
+      </h2>
+      <p style="font-size:1rem; line-height:1.8; color:rgba(255,255,255,0.5); font-weight:300; margin-bottom:40px;">
+        Based in Hobart, we service properties across the greater Southern Tasmania region. Not sure if we cover your area? Just call — we're flexible.
+      </p>
+      <a href="#quote" style="display:inline-block; background:#C8881F; color:#fff; padding:14px 28px; border-radius:3px; font-size:0.85rem; font-weight:500; letter-spacing:0.05em; text-decoration:none;">
+        Get in touch
+      </a>
+    </div>
+
+    <div style="display:flex; flex-wrap:wrap; gap:10px;">
+      <span class="area-pill highlight">Hobart</span>
+      <span class="area-pill">Eastern Shore</span>
+      <span class="area-pill">Sorell</span>
+      <span class="area-pill">Midway Point</span>
+      <span class="area-pill">Lauderdale</span>
+      <span class="area-pill">Clifton Beach</span>
+      <span class="area-pill">Dodges Ferry</span>
+      <span class="area-pill">Kingston</span>
+      <span class="area-pill">Sandy Bay</span>
+      <span class="area-pill">Bellerive</span>
+      <span class="area-pill">Rokeby</span>
+      <span class="area-pill highlight">+ All of Southern TAS</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════
+  QUOTE
+════════════════════════════════════ -->
+<section id="quote" class="quote-section" style="padding:120px 32px;">
+  <div style="max-width:1200px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:start;">
+
+    <!-- Left -->
+    <div class="reveal">
+      <div class="section-label" style="margin-bottom:28px;">Get a Quote</div>
+      <h2 style="font-family:'DM Serif Display',Georgia,serif; font-size:clamp(2rem,3.5vw,2.8rem); line-height:1.15; font-weight:400; color:#161C24; margin-bottom:28px;">
+        Tell us about<br/>
+        <span style="font-style:italic;">your project.</span>
+      </h2>
+      <p style="font-size:1rem; line-height:1.8; color:#5A6E7F; font-weight:300; margin-bottom:48px;">
+        Fill in a few details and we'll be in touch promptly. No obligation — just a straight conversation about what you need and how we can help.
+      </p>
+
+      <div style="display:flex; flex-direction:column; gap:16px;">
+        <a href="tel:0362310000" style="display:flex; align-items:center; gap:16px; text-decoration:none; padding:20px 24px; background:#fff; border:1px solid #DDE2E7; border-radius:4px;">
+          <div style="width:40px; height:40px; background:#F5F0E8; border-radius:3px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+            <svg width="17" height="17" viewBox="0 0 20 20" fill="none" stroke="#C8881F" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M3 3.5C3 2.67 3.67 2 4.5 2h2.13a.5.5 0 01.49.38l1 4a.5.5 0 01-.14.49L6.6 8.2a10.58 10.58 0 004.2 4.2l1.33-1.38a.5.5 0 01.49-.14l4 1a.5.5 0 01.38.49V14.5A2.5 2.5 0 0114.5 17C8.15 17 3 11.85 3 5.5v-2z"/></svg>
+          </div>
+          <div>
+            <div style="font-size:0.75rem; color:#5A6E7F; margin-bottom:2px; letter-spacing:0.04em;">Call directly</div>
+            <div style="font-size:1rem; color:#161C24; font-weight:500;">(03) 6231 0000</div>
+          </div>
+        </a>
+        <a href="mailto:info@hobartelectric.com.au" style="display:flex; align-items:center; gap:16px; text-decoration:none; padding:20px 24px; background:#fff; border:1px solid #DDE2E7; border-radius:4px;">
+          <div style="width:40px; height:40px; background:#F5F0E8; border-radius:3px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+            <svg width="17" height="17" viewBox="0 0 20 20" fill="none" stroke="#C8881F" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="2" y="4" width="16" height="12" rx="1"/><path d="M2 4l8 7 8-7"/></svg>
+          </div>
+          <div>
+            <div style="font-size:0.75rem; color:#5A6E7F; margin-bottom:2px; letter-spacing:0.04em;">Email us</div>
+            <div style="font-size:1rem; color:#161C24; font-weight:500;">info@hobartelectric.com.au</div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- Right: form -->
+    <div style="background:#fff; padding:48px; border:1px solid #DDE2E7; border-radius:4px;" class="reveal reveal-d2">
+      <form id="q-form" novalidate style="display:flex; flex-direction:column; gap:20px;">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+          <div class="field">
+            <label for="f-name">Name <span style="color:#C8881F;">*</span></label>
+            <input type="text" id="f-name" name="name" placeholder="Jane Smith" required autocomplete="name" />
+          </div>
+          <div class="field">
+            <label for="f-phone">Phone <span style="color:#C8881F;">*</span></label>
+            <input type="tel" id="f-phone" name="phone" placeholder="04XX XXX XXX" required autocomplete="tel" />
+          </div>
+        </div>
+        <div class="field">
+          <label for="f-email">Email</label>
+          <input type="email" id="f-email" name="email" placeholder="jane@example.com" autocomplete="email" />
+        </div>
+        <div class="field">
+          <label for="f-suburb">Suburb / Area <span style="color:#C8881F;">*</span></label>
+          <input type="text" id="f-suburb" name="suburb" placeholder="e.g. Sorell, Clifton Beach, Sandy Bay" required />
+        </div>
+        <div class="field">
+          <label for="f-desc">Describe your job <span style="color:#C8881F;">*</span></label>
+          <textarea id="f-desc" name="description" rows="4" placeholder="Even a rough description is helpful." required style="resize:vertical;"></textarea>
+        </div>
+        <div style="background:#F5F0E8; border-radius:4px; padding:14px 16px; font-size:0.82rem; color:#5A6E7F; line-height:1.6;">
+          Once we receive your enquiry, we'll send a link so you can share photos if helpful — photos let us quote more accurately.
+        </div>
+        <button type="submit" style="background:#161C24; color:#fff; padding:16px; border:none; border-radius:3px; font-family:'DM Sans',sans-serif; font-size:0.9rem; font-weight:500; letter-spacing:0.04em; cursor:pointer; transition:background 0.2s;" onmouseover="this.style.background='#C8881F'" onmouseout="this.style.background='#161C24'">
+          Send Enquiry
+        </button>
+        <p style="text-align:center; font-size:0.78rem; color:#A0AEBA;">We respond within one business day.</p>
+      </form>
+      <div id="q-success" style="display:none; text-align:center; padding:48px 0;">
+        <div style="width:56px;height:56px;background:#F0FAF0;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+        </div>
+        <h3 style="font-family:'DM Serif Display',Georgia,serif; font-size:1.5rem; font-weight:400; color:#161C24; margin-bottom:10px;">Enquiry received.</h3>
+        <p style="font-size:0.9rem; color:#5A6E7F;">We'll be in touch within one business day.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════
+  FOOTER
+════════════════════════════════════ -->
+<footer style="background:#0F161F; padding:80px 32px 40px;">
+  <div style="max-width:1200px; margin:0 auto;">
+
+    <div style="display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:64px; margin-bottom:72px; flex-wrap:wrap;">
+
+      <!-- Brand col -->
+      <div>
+        <div style="display:flex; flex-direction:column; line-height:1; margin-bottom:24px; gap:3px;">
+          <span style="font-family:'DM Sans',sans-serif; font-weight:600; font-size:1rem; letter-spacing:0.08em; color:#fff; text-transform:uppercase;">Hobart</span>
+          <span style="font-family:'DM Sans',sans-serif; font-weight:300; font-size:0.58rem; letter-spacing:0.28em; color:#C8881F; text-transform:uppercase;">Electric</span>
+        </div>
+        <p style="font-size:0.85rem; line-height:1.75; color:rgba(255,255,255,0.35); max-width:260px; margin-bottom:28px; font-weight:300;">
+          Licensed electrical contractors servicing Hobart and Southern Tasmania.
+        </p>
+        <div style="display:flex; gap:10px;">
+          <a href="https://www.facebook.com/hobartelectric.com.au/" target="_blank" rel="noopener" aria-label="Facebook" style="width:36px;height:36px;border:1px solid rgba(255,255,255,0.1);border-radius:3px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.4);transition:border-color 0.2s,color 0.2s;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+          </a>
+          <a href="mailto:info@hobartelectric.com.au" aria-label="Email" style="width:36px;height:36px;border:1px solid rgba(255,255,255,0.1);border-radius:3px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.4);transition:border-color 0.2s,color 0.2s;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="1"/><path d="M2 4l10 9 10-9"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Services -->
+      <div>
+        <div style="font-size:0.72rem; font-weight:500; letter-spacing:0.14em; color:rgba(255,255,255,0.4); text-transform:uppercase; margin-bottom:20px;">Services</div>
+        <ul style="list-style:none; display:flex; flex-direction:column; gap:10px;">
+          <li><a href="#services" style="font-size:0.85rem; color:rgba(255,255,255,0.45); text-decoration:none; font-weight:300;">Residential</a></li>
+          <li><a href="#services" style="font-size:0.85rem; color:rgba(255,255,255,0.45); text-decoration:none; font-weight:300;">Commercial</a></li>
+          <li><a href="#services" style="font-size:0.85rem; color:rgba(255,255,255,0.45); text-decoration:none; font-weight:300;">EV Chargers</a></li>
+          <li><a href="#services" style="font-size:0.85rem; color:rgba(255,255,255,0.45); text-decoration:none; font-weight:300;">Switchboards</a></li>
+          <li><a href="#services" style="font-size:0.85rem; color:rgba(255,255,255,0.45); text-decoration:none; font-weight:300;">Rural Properties</a></li>
+          <li><a href="#services" style="font-size:0.85rem; color:rgba(255,255,255,0.45); text-decoration:none; font-weight:300;">Lighting</a></li>
+          <li><a href="#services" style="font-size:0.85rem; color:rgba(255,255,255,0.45); text-decoration:none; font-weight:300;">Fault Finding</a></li>
+        </ul>
+      </div>
+
+      <!-- Areas -->
+      <div>
+        <div style="font-size:0.72rem; font-weight:500; letter-spacing:0.14em; color:rgba(255,255,255,0.4); text-transform:uppercase; margin-bottom:20px;">Areas</div>
+        <ul style="list-style:none; display:flex; flex-direction:column; gap:10px;">
+          <li style="font-size:0.85rem; color:rgba(255,255,255,0.45); font-weight:300;">Hobart</li>
+          <li style="font-size:0.85rem; color:rgba(255,255,255,0.45); font-weight:300;">Eastern Shore</li>
+          <li style="font-size:0.85rem; color:rgba(255,255,255,0.45); font-weight:300;">Sorell</li>
+          <li style="font-size:0.85rem; color:rgba(255,255,255,0.45); font-weight:300;">Clifton Beach</li>
+          <li style="font-size:0.85rem; color:rgba(255,255,255,0.45); font-weight:300;">Lauderdale</li>
+          <li style="font-size:0.85rem; color:rgba(255,255,255,0.45); font-weight:300;">Dodges Ferry</li>
+          <li style="font-size:0.85rem; color:rgba(255,255,255,0.45); font-weight:300;">Southern Tasmania</li>
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div>
+        <div style="font-size:0.72rem; font-weight:500; letter-spacing:0.14em; color:rgba(255,255,255,0.4); text-transform:uppercase; margin-bottom:20px;">Contact</div>
+        <div style="display:flex; flex-direction:column; gap:12px;">
+          <a href="tel:0362310000" style="font-size:0.85rem; color:rgba(255,255,255,0.55); text-decoration:none; font-weight:300;">(03) 6231 0000</a>
+          <a href="mailto:info@hobartelectric.com.au" style="font-size:0.85rem; color:rgba(255,255,255,0.55); text-decoration:none; font-weight:300;">info@hobartelectric.com.au</a>
+          <div style="font-size:0.85rem; color:rgba(255,255,255,0.35); font-weight:300; line-height:1.6; margin-top:8px; border-top:1px solid rgba(255,255,255,0.07); padding-top:16px;">
+            Electrical Contractor Licence<br/>
+            State of Tasmania<br/>
+            Public Liability &amp; Professional<br/>Indemnity Insured
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom -->
+    <div style="border-top:1px solid rgba(255,255,255,0.07); padding-top:32px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px;">
+      <span style="font-size:0.78rem; color:rgba(255,255,255,0.22); font-weight:300;">© 2026 Hobart Electric. All rights reserved.</span>
+      <span style="font-size:0.78rem; color:rgba(255,255,255,0.22); font-weight:300;">Professional electrical services · Southern Tasmania</span>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ════════════════════════════════════
+  SCRIPTS
+════════════════════════════════════ -->
+<script>
+  // Mobile nav
+  const mobToggle = document.getElementById('mob-toggle');
+  const mobMenu = document.getElementById('mob-menu');
+  mobToggle.addEventListener('click', () => mobMenu.classList.toggle('open'));
+  function closeMob() { mobMenu.classList.remove('open'); }
+
+  // Nav scroll state
+  const siteNav = document.getElementById('site-nav');
+  const onScroll = () => siteNav.classList.toggle('solid', window.scrollY > 80);
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const ro = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  revealEls.forEach(el => ro.observe(el));
+
+  // Form
+  const qForm = document.getElementById('q-form');
+  const qSuccess = document.getElementById('q-success');
+  qForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const vals = ['f-name','f-phone','f-suburb','f-desc'].map(id => document.getElementById(id).value.trim());
+    if (vals.some(v => !v)) { alert('Please complete all required fields.'); return; }
+    qForm.style.display = 'none';
+    qSuccess.style.display = 'block';
+  });
+
+  // Responsive grid collapse on mobile
+  const applyMobileLayout = () => {
+    const isMobile = window.innerWidth < 768;
+    document.querySelectorAll('[style*="grid-template-columns:1fr 1fr"]').forEach(el => {
+      if (isMobile) { el.style.gridTemplateColumns = '1fr'; el.style.gap = '40px'; }
+    });
+    document.querySelectorAll('[style*="grid-template-columns:1fr 2fr"]').forEach(el => {
+      if (isMobile) { el.style.gridTemplateColumns = '1fr'; el.style.gap = '24px'; }
+    });
+    document.querySelectorAll('[style*="grid-template-columns:2fr 1fr 1fr 1fr"]').forEach(el => {
+      if (isMobile) { el.style.gridTemplateColumns = '1fr 1fr'; el.style.gap = '32px'; }
+    });
+    // Project gallery
+    const projGrid = document.querySelector('[style*="grid-template-columns:1fr 1fr 1fr"]');
+    if (projGrid && isMobile) {
+      projGrid.style.gridTemplateColumns = '1fr';
+      projGrid.querySelectorAll('[style*="grid-column"]').forEach(el => { el.style.gridColumn = ''; el.style.gridRow = ''; });
+      projGrid.querySelectorAll('.proj-img[style*="aspect-ratio:2/3"]').forEach(el => el.style.aspectRatio = '3/2');
+    }
+  };
+  applyMobileLayout();
+  window.addEventListener('resize', applyMobileLayout);
+</script>
+</body>
+</html>
