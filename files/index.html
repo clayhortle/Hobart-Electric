@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hobart Electric | Licensed Electrical Contractors, Southern Tasmania</title>
+  <meta name="description" content="Hobart Electric — licensed and insured electrical contractors serving Hobart and Southern Tasmania. Residential, commercial, EV chargers, rural properties and more." />
+  <style>
+    @font-face{font-family:'Horatio';src:url('Horatio_D_Light.otf') format('opentype');font-weight:300;font-display:swap;}
+    @font-face{font-family:'Horatio';src:url('Horatio_D_Medium.otf') format('opentype');font-weight:500;font-display:swap;}
+    @font-face{font-family:'Horatio';src:url('Horatio_D_Bold.otf') format('opentype');font-weight:700;font-display:swap;}
+  </style>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Horatio', Georgia, serif; font-weight: 300; color: #1C2126; background: #fff; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+
+    /* TOKENS */
+    :root {
+      --ink:     #1a1a1a;
+      --char:    #2e2e2e;
+      --slate:   #6b6b6b;
+      --mid:     #7A8A96;
+      --rule:    #d4cec6;
+      --cream:   #f4f0ea;
+      --off:     #faf8f5;--sand:   #e8e0d4;--taupe: #b8a898;
+      --white:   #FFFFFF;
+      --taupe-a:  #9a8878;
+      
+      --pad:     clamp(20px, 5vw, 48px);
+      --max:     1140px;
+    }
+
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--pad); }
+
+    /* EYEBROW */
+    .ey {
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--taupe); display: flex; align-items: center; gap: 10px;
+    }
+    .ey::after { content: ''; width: 24px; height: 1px; background: var(--blk); opacity: 0.5; }
+
+    /* BUTTONS */
+    .btn-r {
+      display: inline-block; background: var(--blk); color: #fff;
+      font-family: 'Horatio', Georgia, serif; font-size: 0.8rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 14px 28px; border: 1.5px solid var(--blk);
+      transition: background 0.2s, border-color 0.2s; cursor: pointer;
+    }
+    .btn-r:hover { background: var(--char); border-color: var(--red-dk); }
+    .btn-g {
+      display: inline-block; background: transparent; color: #fff;
+      font-family: 'Horatio', Georgia, serif; font-size: 0.8rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 14px 28px; border: 2px solid rgba(255,255,255,0.35);
+      transition: border-color 0.2s; cursor: pointer;
+    }
+    .btn-g:hover { border-color: rgba(255,255,255,0.9); }
+
+    /* NAV */
+    #nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      height: 68px; background: var(--ink);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      transition: box-shadow 0.3s;
+    }
+    #nav.sh { box-shadow: 0 2px 24px rgba(0,0,0,0.4); }
+    .nav-i {
+      max-width: var(--max); margin: 0 auto; padding: 0 var(--pad);
+      height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 20px;
+    }
+    /* logo slot */
+    .logo-slot { display: flex; align-items: center; flex-shrink: 0; }
+    .logo-slot img { height: 40px; width: auto; display: block; }
+    .logo-txt { display: flex; flex-direction: column; gap: 2px; line-height: 1; }
+    .logo-txt .a { font-size: 1.1rem; font-weight: 900; letter-spacing: 0.07em; text-transform: uppercase; color: #fff; }
+    .logo-txt .b { font-size: 0.5rem; font-weight: 300; letter-spacing: 0.35em; text-transform: uppercase; color: var(--taupe); }
+    /* nav links */
+    .nl { display: flex; align-items: center; gap: 26px; }
+    .nl a { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.6); transition: color 0.2s; }
+    .nl a:hover { color: #fff; }
+    .nav-q { font-size: 0.76rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; background: var(--blk); color: #fff; padding: 9px 18px; border: none; cursor: pointer; transition: background 0.2s; white-space: nowrap; }
+    .nav-q:hover { background: var(--char); }
+    #hbg { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+    /* mob */
+    #mob { display: none; flex-direction: column; background: var(--ink); border-top: 1px solid rgba(255,255,255,0.07); padding: 16px var(--pad) 24px; }
+    #mob.o { display: flex; }
+    #mob a { font-size: 0.82rem; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: rgba(255,255,255,0.6); padding: 11px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    #mob a:hover { color: #fff; }
+    .mob-q { margin-top: 14px; background: var(--blk); color: #fff; text-align: center; padding: 13px; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; }
+
+    /* HERO */
+    .hero { min-height: 100svh; background: var(--ink); display: flex; flex-direction: column; position: relative; overflow: hidden; }
+    .h-bg { position: absolute; inset: 0; background-image: url('https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=1600&q=65'); background-size: cover; background-position: center 35%; opacity: 0.12; }
+    .h-accent { position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--blk); }
+    .h-body { flex: 1; display: flex; align-items: center; padding: 108px var(--pad) 56px; position: relative; z-index: 2; }
+    .h-text { max-width: 680px; }
+    .h-ey { font-size: 0.66rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--taupe); margin-bottom: 22px; display: flex; align-items: center; gap: 12px; }
+    .h-ey::before { content: ''; display: block; width: 28px; height: 2px; background: var(--blk); }
+    h1 { font-family: 'Horatio', Georgia, serif; font-size: clamp(2rem, 5vw, 3.7rem); font-weight: 300; line-height: 1.22; color: #fff; margin-bottom: 26px; }
+    h1 strong { font-weight: 700; }
+    .h-sub { font-size: clamp(0.93rem, 1.5vw, 1.08rem); font-weight: 300; line-height: 1.82; color: rgba(255,255,255,0.58); max-width: 500px; margin-bottom: 40px; }
+    .h-btns { display: flex; flex-wrap: wrap; gap: 12px; }
+    .h-foot { position: relative; z-index: 2; border-top: 1px solid rgba(255,255,255,0.08); padding: 18px var(--pad); }
+    .h-tags { max-width: var(--max); margin: 0 auto; display: flex; flex-wrap: wrap; gap: 6px 28px; }
+    .h-tag { font-size: 0.73rem; font-weight: 400; letter-spacing: 0.04em; color: rgba(255,255,255,0.38); display: flex; align-items: center; gap: 7px; }
+    .h-tag::before { content: ''; display: block; width: 4px; height: 4px; border-radius: 50%; background: var(--blk); flex-shrink: 0; }
+
+    /* TRUST STRIP */
+    .ts { background: var(--sand); padding: 16px var(--pad); }
+    .ts-i { max-width: var(--max); margin: 0 auto; display: flex; flex-wrap: wrap; gap: 8px 28px; justify-content: center; }
+    .sand-tc{color:var(--char)!important} display: flex; align-items: center; gap: 7px; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--char); }
+    .td { width: 4px; height: 4px; border-radius: 50%; background: var(--blk); flex-shrink: 0; }
+
+    /* SECTIONS */
+    .sec { padding: clamp(60px, 9vw, 108px) var(--pad); }
+    h2 { font-family: 'Horatio', Georgia, serif; font-size: clamp(1.6rem, 3vw, 2.35rem); font-weight: 300; line-height: 1.28; color: var(--ink); }
+    h2 em { font-style: italic; }
+    p { line-height: 1.82; color: var(--slate); font-weight: 300; }
+
+    /* INTRO */
+    .ig { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(36px, 7vw, 96px); align-items: start; }
+    .r-rule { width: 36px; height: 3px; background: var(--blk); margin-bottom: 24px; }
+    .stat-row { margin-top: 44px; padding-top: 36px; border-top: 1px solid var(--rule); display: flex; flex-wrap: wrap; gap: 32px; }
+    .stat-item { }
+    .stat-n { font-family: 'Horatio', Georgia, serif; font-size: 1.9rem; font-weight: 300; color: var(--ink); line-height: 1; }
+    .stat-l { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.13em; text-transform: uppercase; color: var(--mid); margin-top: 5px; }
+    .stat-div { width: 1px; background: var(--rule); align-self: stretch; }
+
+    /* SERVICES */
+    .sb { background: var(--off); }
+    .sh-g { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; align-items: end; margin-bottom: 52px; }
+    .svc-l { display: flex; flex-direction: column; }
+    .svc-row { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 24px; padding: 24px 0; border-bottom: 1px solid var(--rule); transition: padding-left 0.2s; cursor: default; }
+    .svc-row:first-child { border-top: 1px solid var(--rule); }
+    .svc-row:hover { padding-left: 6px; }
+    .svc-nm { font-family: 'Horatio', Georgia, serif; font-size: 0.97rem; font-weight: 700; color: var(--ink); margin-bottom: 3px; transition: color 0.2s; }
+    .svc-row:hover .svc-nm { color: var(--taupe); }
+    .svc-ds { font-size: 0.85rem; color: var(--mid); font-weight: 300; line-height: 1.6; }
+    .svc-ar { width: 32px; height: 32px; flex-shrink: 0; border: 1px solid var(--rule); display: flex; align-items: center; justify-content: center; color: var(--mid); transition: background 0.2s, border-color 0.2s, color 0.2s; }
+    .svc-row:hover .svc-ar { background: var(--blk); border-color: var(--taupe); color: #fff; }
+
+    /* WHY */
+    .wg { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--rule); border: 1px solid var(--rule); margin-top: 48px; }
+    .wc { background: #fff; padding: clamp(24px, 4vw, 44px); }
+    .wl { font-size: 0.63rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--taupe); margin-bottom: 12px; }
+    .wh { font-family: 'Horatio', Georgia, serif; font-size: 1.05rem; font-weight: 400; line-height: 1.4; color: var(--ink); margin-bottom: 10px; }
+    .wb { font-size: 0.87rem; line-height: 1.78; color: var(--slate); font-weight: 300; }
+
+    /* PROJECTS */
+    .pb { background: var(--ink); }
+    .ph { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 44px; flex-wrap: wrap; gap: 16px; }
+    .ph h2 { color: #fff; }
+    .pl { font-size: 0.76rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--taupe); }
+    .pg { display: grid; grid-template-columns: repeat(3,1fr); grid-template-rows: auto auto; gap: 10px; }
+    .pc { position: relative; overflow: hidden; }
+    .pc img { width: 100%; object-fit: cover; display: block; transition: transform 0.45s ease; aspect-ratio: 4/3; }
+    .pc:hover img { transform: scale(1.04); }
+    .pc--t { grid-row: span 2; }
+    .pc--t img { aspect-ratio: auto; height: 100%; min-height: 260px; }
+    .pcap { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(15,20,26,0.92) 0%, transparent 100%); padding: 28px 18px 16px; }
+    .pcat { font-size: 0.63rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--taupe); margin-bottom: 3px; }
+    .ptit { font-size: 0.88rem; font-weight: 700; color: #fff; }
+    .psub { font-size: 0.73rem; color: rgba(255,255,255,0.38); margin-top: 3px; font-style: italic; }
+
+    /* AREAS */
+    .ab { background: var(--sand); }
+    .ag { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+    .ag h2 { color: #fff; margin-bottom: 18px; }
+    .ag p { color: rgba(255,255,255,0.48); font-size: 0.95rem; margin-bottom: 32px; }
+    .pills { display: flex; flex-wrap: wrap; gap: 8px; }
+    .pi { padding: 8px 15px; border: 1px solid rgba(255,255,255,0.13); font-size: 0.8rem; font-weight: 400; color: rgba(255,255,255,0.55); transition: border-color 0.2s, color 0.2s; }
+    .pi:hover { border-color: var(--taupe); color: #fff; }
+    .pi-h { border-color: rgba(192,53,28,0.45); color: var(--taupe); font-weight: 700; }
+
+    /* QUOTE */
+    .qb { background: var(--off); }
+    .qg { display: grid; grid-template-columns: 1fr 1fr; gap: 68px; align-items: start; }
+    .cb { display: flex; flex-direction: column; gap: 12px; margin-top: 36px; }
+    .cr { display: flex; align-items: center; gap: 14px; background: #fff; border: 1px solid var(--rule); padding: 16px 18px; transition: border-color 0.2s; }
+    .cr:hover { border-color: var(--taupe); }
+    .ci { width: 36px; height: 36px; flex-shrink: 0; background: var(--mist); display: flex; align-items: center; justify-content: center; color: var(--taupe); }
+    .cl { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mid); margin-bottom: 2px; }
+    .cv { font-size: 0.92rem; font-weight: 700; color: var(--ink); }
+    /* form */
+    .fw { background: #fff; border: 1px solid var(--rule); padding: clamp(24px, 5vw, 44px); }
+    .fl { display: flex; flex-direction: column; gap: 6px; }
+    .fl label { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--slate); }
+    .fl input, .fl textarea { font-family: 'Horatio', Georgia, serif; font-size: 0.93rem; font-weight: 300; color: var(--ink); border: 1px solid var(--rule); padding: 12px 15px; outline: none; width: 100%; background: #fff; transition: border-color 0.2s; -webkit-appearance: none; border-radius: 0; }
+    .fl input:focus, .fl textarea:focus { border-color: var(--taupe); }
+    .fl input::placeholder, .fl textarea::placeholder { color: #A8B4BE; }
+    .fg { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .fn { font-size: 0.78rem; font-weight: 300; color: var(--mid); line-height: 1.65; padding: 12px 14px; background: var(--mist); border-left: 2px solid var(--taupe); }
+    .fs { width: 100%; background: var(--ink); color: #fff; font-family: 'Horatio', Georgia, serif; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 15px; border: 1.5px solid var(--ink); cursor: pointer; transition: background 0.2s, border-color 0.2s; }
+    .fs:hover { background: var(--blk); border-color: var(--taupe); }
+
+    /* FOOTER */
+    footer { background: #0F1318; padding: 60px var(--pad) 30px; }
+    .fg2 { max-width: var(--max); margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 44px; margin-bottom: 52px; }
+    .flt { display: flex; flex-direction: column; gap: 3px; line-height: 1; margin-bottom: 18px; }
+    .flt .a { font-size: 0.95rem; font-weight: 900; letter-spacing: 0.07em; text-transform: uppercase; color: #fff; }
+    .flt .b { font-size: 0.48rem; font-weight: 300; letter-spacing: 0.35em; text-transform: uppercase; color: var(--taupe); }
+    .ftg { font-size: 0.82rem; font-weight: 300; color: rgba(255,255,255,0.28); line-height: 1.72; margin-bottom: 22px; }
+    .fsoc { display: flex; gap: 8px; }
+    .fsb { width: 32px; height: 32px; border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.32); transition: border-color 0.2s, color 0.2s; }
+    .fsb:hover { border-color: var(--taupe); color: var(--taupe); }
+    .fch { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.28); margin-bottom: 16px; }
+    .fcl { display: flex; flex-direction: column; gap: 9px; }
+    .fcl a, .fcl span { font-size: 0.81rem; font-weight: 300; color: rgba(255,255,255,0.42); line-height: 1.55; }
+    .fcl a:hover { color: rgba(255,255,255,0.8); }
+    .fbot { max-width: var(--max); margin: 0 auto; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 26px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+    .fbot span { font-size: 0.72rem; font-weight: 300; color: rgba(255,255,255,0.18); }
+
+    /* REVEAL */
+    .rv { opacity: 0; transform: translateY(18px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .rv.in { opacity: 1; transform: none; }
+    .d1 { transition-delay: 0.1s; }
+    .d2 { transition-delay: 0.2s; }
+    .d3 { transition-delay: 0.3s; }
+    @media (prefers-reduced-motion: reduce) { .rv { opacity:1; transform:none; transition:none; } }
+
+    /* RESPONSIVE */
+    @media (max-width: 860px) {
+      .nl, .nav-q { display: none; }
+      #hbg { display: block; }
+      .ig, .sh-g, .ag, .qg { grid-template-columns: 1fr; gap: 36px; }
+      .wg { grid-template-columns: 1fr; }
+      .pg { grid-template-columns: 1fr 1fr; }
+      .pc--t { grid-row: span 1; }
+      .pc--t img { aspect-ratio: 4/3; height: auto; min-height: unset; }
+      .fg2 { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .fg { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 520px) {
+      .pg { grid-template-columns: 1fr; }
+      .fg2 { grid-template-columns: 1fr; }
+      .h-btns { flex-direction: column; }
+      .btn-r, .btn-g { text-align: center; }
+      .stat-div { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<header id="nav">
+  <div class="nav-i">
+    <a href="#" class="logo-slot" aria-label="Hobart Electric home" style="display:flex;align-items:center;gap:14px;">
+      <img src="he_circle.png" alt="" aria-hidden="true" style="height:40px;width:40px;filter:invert(1);flex-shrink:0;"/>
+      <div class="logo-txt">
+        <span class="a">Hobart Electric</span>
+        <span class="b">Southern Tasmania</span>
+      </div>
+    </a>
+    <nav class="nl" aria-label="Primary">
+      <a href="#services">Services</a>
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#areas">Areas</a>
+      <a href="tel:0362310000" style="color:rgba(255,255,255,0.5); font-size:0.82rem; letter-spacing:0.04em; text-transform:none;">(03) 6231 0000</a>
+    </nav>
+    <a href="#quote" class="nav-q">Get a Quote</a>
+    <button id="hbg" aria-label="Open menu" aria-expanded="false">
+      <svg width="22" height="16" viewBox="0 0 22 16" fill="none" aria-hidden="true">
+        <rect width="22" height="2" rx="1" fill="white"/>
+        <rect y="7" width="22" height="2" rx="1" fill="white"/>
+        <rect y="14" width="22" height="2" rx="1" fill="white"/>
+      </svg>
+    </button>
+  </div>
+</header>
+<div id="mob" role="navigation" aria-label="Mobile">
+  <a href="#services" onclick="cm()">Services</a>
+  <a href="#about" onclick="cm()">About</a>
+  <a href="#projects" onclick="cm()">Projects</a>
+  <a href="#areas" onclick="cm()">Areas</a>
+  <a href="tel:0362310000" onclick="cm()">(03) 6231 0000</a>
+  <a href="#quote" onclick="cm()" class="mob-q">Get a Quote</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" aria-label="Welcome">
+  <div class="h-bg" aria-hidden="true"></div>
+  <div class="h-accent" aria-hidden="true"></div>
+  <div class="h-body">
+    <div class="wrap" style="width:100%; padding:0 var(--pad);">
+      <div class="h-text">
+        <div class="h-ey">Licensed Electrical Contractors</div>
+        <h1>Hobart Electric —<br/><strong>trusted across</strong><br/>Southern Tasmania.</h1>
+        <p class="h-sub">Reliable electrical services for homes, businesses, rural properties and holiday rentals.</p>
+        <div class="h-btns">
+          <a href="#quote" class="btn-dark">Get a Quote</a>
+          <a href="tel:0362310000" class="btn-g">Call Now</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="h-foot">
+    <div class="h-tags wrap" style="padding:0 var(--pad);">
+      <span class="h-tag">Licensed &amp; Insured</span>
+      <span class="h-tag">Locally Owned &amp; Operated</span>
+      <span class="h-tag">Residential &amp; Commercial</span>
+      <span class="h-tag">Responsive Service</span>
+      <span class="h-tag">Quality Workmanship</span>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST STRIP -->
+<div class="ts" role="complementary">
+  <div class="ts-i">
+    <span class="tc"><span class="td"></span>Licensed &amp; Insured</span>
+    <span class="tc"><span class="td"></span>Local Tasmanian Business</span>
+    <span class="tc"><span class="td"></span>Residential &amp; Commercial</span>
+    <span class="tc"><span class="td"></span>Reliable Communication</span>
+    <span class="tc"><span class="td"></span>Quality Workmanship</span>
+  </div>
+</div>
+
+<!-- INTRO -->
+<section class="sec" aria-labelledby="intro-h">
+  <div class="wrap">
+    <div class="ig rv">
+      <div>
+        <div class="r-rule"></div>
+        <div class="ey" style="margin-bottom:22px;">About Hobart Electric</div>
+        <h2 id="intro-h">An established name<br/>in Tasmanian electrical.</h2>
+      </div>
+      <div>
+        <p style="font-size:1.02rem; margin-bottom:20px;">Hobart Electric is a locally owned electrical contracting business serving Hobart and the greater Southern Tasmania region. We work with homeowners, builders, property managers and business owners who value reliable workmanship and clear communication.</p>
+        <p style="font-size:1.02rem;">Every job gets our full attention — from a single power point to a complete commercial fit-out. We treat every property with care and leave every site tidy.</p>
+        <div class="stat-row">
+          <div class="stat-item">
+            <div class="stat-n">Local</div>
+            <div class="stat-l">Tasmanian Business</div>
+          </div>
+          <div class="stat-div"></div>
+          <div class="stat-item">
+            <div class="stat-n">100%</div>
+            <div class="stat-l">Licensed &amp; Insured</div>
+          </div>
+          <div class="stat-div"></div>
+          <div class="stat-item">
+            <div class="stat-n">Res &amp; Com</div>
+            <div class="stat-l">Electrical Services</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="sec sb" aria-labelledby="svc-h">
+  <div class="wrap">
+    <div class="sh-g rv">
+      <div>
+        <div class="ey" style="margin-bottom:20px;">What We Do</div>
+        <h2 id="svc-h">Electrical services for<br/>every property type.</h2>
+      </div>
+      <p style="font-size:0.95rem; padding-top:4px;">From residential wiring to commercial installations, EV charging and rural infrastructure — handled with the same care and standard every time.</p>
+    </div>
+    <div class="svc-l rv d1">
+      <div class="svc-row">
+        <div><div class="svc-nm">Residential Electrical</div><div class="svc-ds">New homes, renovations, power points, safety switches, smoke alarms and full rewires.</div></div>
+        <div class="svc-ar" aria-hidden="true"><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+      <div class="svc-row">
+        <div><div class="svc-nm">Commercial Electrical</div><div class="svc-ds">Shop fit-outs, office power, commercial lighting, data infrastructure and compliance.</div></div>
+        <div class="svc-ar" aria-hidden="true"><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+      <div class="svc-row">
+        <div><div class="svc-nm">EV Charger Installation</div><div class="svc-ds">Home and commercial EV charging solutions — future-proof your property for electric vehicles.</div></div>
+        <div class="svc-ar" aria-hidden="true"><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+      <div class="svc-row">
+        <div><div class="svc-nm">Switchboard Upgrades</div><div class="svc-ds">Ageing switchboards replaced with modern safety switch panels to current Australian standards.</div></div>
+        <div class="svc-ar" aria-hidden="true"><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+      <div class="svc-row">
+        <div><div class="svc-nm">Property &amp; Holiday Rental Maintenance</div><div class="svc-ds">Electrical maintenance and compliance for investment properties, holiday rentals and Airbnb hosts.</div></div>
+        <div class="svc-ar" aria-hidden="true"><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+      <div class="svc-row">
+        <div><div class="svc-nm">Rural Properties</div><div class="svc-ds">Sheds, pump systems, outbuildings and rural electrical infrastructure across Southern Tasmania.</div></div>
+        <div class="svc-ar" aria-hidden="true"><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+      <div class="svc-row">
+        <div><div class="svc-nm">Lighting Design &amp; Installation</div><div class="svc-ds">LED upgrades, feature lighting, outdoor and landscape lighting for homes and businesses.</div></div>
+        <div class="svc-ar" aria-hidden="true"><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+      <div class="svc-row">
+        <div><div class="svc-nm">Fault Finding &amp; Repairs</div><div class="svc-ds">Systematic diagnosis and repair of electrical faults — resolved quickly and with minimal disruption.</div></div>
+        <div class="svc-ar" aria-hidden="true"><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section id="about" class="sec" aria-labelledby="why-h">
+  <div class="wrap">
+    <div class="rv">
+      <div class="ey" style="margin-bottom:18px;">Why Hobart Electric</div>
+      <h2 id="why-h">The same standard,<br/><em>on every job.</em></h2>
+    </div>
+    <div class="wg rv d1">
+      <div class="wc">
+        <div class="wl">Reliability</div>
+        <div class="wh">We show up when we say we will.</div>
+        <p class="wb">Appointments kept, timelines respected. If anything changes, we'll let you know — not leave you guessing.</p>
+      </div>
+      <div class="wc">
+        <div class="wl">Communication</div>
+        <div class="wh">No chasing. No surprises.</div>
+        <p class="wb">Clear quotes before we start. Updates as the job progresses. You'll always know where things stand.</p>
+      </div>
+      <div class="wc">
+        <div class="wl">Workmanship</div>
+        <div class="wh">Done to standard, every time.</div>
+        <p class="wb">All work complies with Australian Standards. We take pride in neat, professional results — and we leave every site clean and tidy.</p>
+      </div>
+      <div class="wc">
+        <div class="wl">Local Knowledge</div>
+        <div class="wh">We know Tasmanian properties.</div>
+        <p class="wb">Older wiring, rural infrastructure, coastal conditions — we understand the realities of the properties we work on and plan accordingly.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="sec pb" aria-labelledby="proj-h">
+  <div class="wrap">
+    <div class="ph rv">
+      <div>
+        <div class="ey" style="color:rgba(192,53,28,0.8); margin-bottom:18px;">Our Work</div>
+        <h2 id="proj-h" style="color:#fff;">Project examples</h2>
+        <p style="color:rgba(255,255,255,0.35); font-size:0.8rem; margin-top:8px; font-style:italic; font-weight:300;">Representative images — real project photos to be added.</p>
+      </div>
+      <a href="#quote" class="pl">Start your project →</a>
+    </div>
+    <div class="pg rv d1">
+      <div class="pc pc--t">
+        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=65" alt="Switchboard upgrade project" loading="lazy" />
+        <div class="pcap"><div class="pcat">Switchboard</div><div class="ptit">Safety Switch Upgrade</div><div class="psub">Residential — Sandy Bay</div></div>
+      </div>
+      <div class="pc">
+        <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=700&q=65" alt="EV charger installation" loading="lazy" />
+        <div class="pcap"><div class="pcat">EV Charging</div><div class="ptit">Home Charger Installation</div><div class="psub">Residential — Kingston</div></div>
+      </div>
+      <div class="pc">
+        <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=700&q=65" alt="Commercial electrical" loading="lazy" />
+        <div class="pcap"><div class="pcat">Commercial</div><div class="ptit">Office Electrical Fit-Out</div><div class="psub">Commercial — Hobart CBD</div></div>
+      </div>
+      <div class="pc">
+        <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?w=700&q=65" alt="Feature lighting" loading="lazy" />
+        <div class="pcap"><div class="pcat">Lighting</div><div class="ptit">Feature Lighting</div><div class="psub">Residential — Lauderdale</div></div>
+      </div>
+      <div class="pc">
+        <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=700&q=65" alt="Holiday rental property" loading="lazy" />
+        <div class="pcap"><div class="pcat">Holiday Property</div><div class="ptit">Compliance &amp; Maintenance</div><div class="psub">Rental — Clifton Beach</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AREAS -->
+<section id="areas" class="sec ab" aria-labelledby="areas-h">
+  <div class="wrap">
+    <div class="ag rv">
+      <div>
+        <div class="ey" style="color:rgba(192,53,28,0.75); margin-bottom:18px;">Where We Work</div>
+        <h2 id="areas-h">Southern Tasmania<br/><em>and surrounds.</em></h2>
+        <p>Based in Hobart, we work across the greater Southern Tasmania region. Not sure if we cover your area? Give us a call.</p>
+        <a href="#quote" class="btn-dark" style="margin-top:30px; display:inline-block;">Check Your Area</a>
+      </div>
+      <div class="pills">
+        <span class="pi pi-h">Hobart</span>
+        <span class="pi">Eastern Shore</span>
+        <span class="pi">Sorell</span>
+        <span class="pi">Midway Point</span>
+        <span class="pi">Lauderdale</span>
+        <span class="pi">Clifton Beach</span>
+        <span class="pi">Dodges Ferry</span>
+        <span class="pi">Kingston</span>
+        <span class="pi">Sandy Bay</span>
+        <span class="pi">Bellerive</span>
+        <span class="pi">Rokeby</span>
+        <span class="pi">Cambridge</span>
+        <span class="pi">Richmond</span>
+        <span class="pi pi-h">+ All of Southern TAS</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<section id="quote" class="sec qb" aria-labelledby="quote-h">
+  <div class="wrap">
+    <div class="qg">
+      <div class="rv">
+        <div class="ey" style="margin-bottom:18px;">Get a Quote</div>
+        <h2 id="quote-h">Tell us about<br/><em>your project.</em></h2>
+        <p style="margin-top:18px; font-size:0.95rem;">Fill in a few details and we'll get back to you promptly. No obligation — just a straight conversation about what you need.</p>
+        <div class="cb">
+          <a href="tel:0362310000" class="cr">
+            <div class="ci"><svg width="17" height="17" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M3 3.5C3 2.67 3.67 2 4.5 2h2.13a.5.5 0 01.49.38l1 4a.5.5 0 01-.14.49L6.6 8.2a10.58 10.58 0 004.2 4.2l1.33-1.38a.5.5 0 01.49-.14l4 1a.5.5 0 01.38.49V14.5A2.5 2.5 0 0114.5 17C8.15 17 3 11.85 3 5.5v-2z"/></svg></div>
+            <div><div class="cl">Call directly</div><div class="cv">(03) 6231 0000</div></div>
+          </a>
+          <a href="mailto:info@hobartelectric.com.au" class="cr">
+            <div class="ci"><svg width="17" height="17" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="2" y="4" width="16" height="12" rx="1"/><path d="M2 4l8 7 8-7"/></svg></div>
+            <div><div class="cl">Email</div><div class="cv">info@hobartelectric.com.au</div></div>
+          </a>
+        </div>
+      </div>
+      <div class="fw rv d2">
+        <form id="qf" novalidate>
+          <div style="display:flex;flex-direction:column;gap:16px;">
+            <div class="fg">
+              <div class="fl"><label for="fn">Name <span style="color:var(--taupe)">*</span></label><input type="text" id="fn" name="name" placeholder="Jane Smith" required autocomplete="name"/></div>
+              <div class="fl"><label for="fp">Phone <span style="color:var(--taupe)">*</span></label><input type="tel" id="fp" name="phone" placeholder="04XX XXX XXX" required autocomplete="tel"/></div>
+            </div>
+            <div class="fl"><label for="fe">Email</label><input type="email" id="fe" name="email" placeholder="jane@example.com" autocomplete="email"/></div>
+            <div class="fl"><label for="fs">Suburb / Area <span style="color:var(--taupe)">*</span></label><input type="text" id="fs" name="suburb" placeholder="e.g. Sorell, Clifton Beach, Sandy Bay" required/></div>
+            <div class="fl"><label for="fd">Describe your job <span style="color:var(--taupe)">*</span></label><textarea id="fd" name="desc" rows="4" placeholder="Even a rough description helps us understand what's needed." required style="resize:vertical;"></textarea></div>
+            <div class="fn">Once we receive your enquiry we'll send a link so you can share photos if helpful — photos allow us to quote more accurately.</div>
+            <button type="submit" class="fs">Send Enquiry</button>
+            <p style="text-align:center;font-size:0.76rem;color:var(--mid);font-weight:300;">We respond within one business day.</p>
+          </div>
+        </form>
+        <div id="qok" style="display:none;text-align:center;padding:44px 0;">
+          <div style="width:50px;height:50px;background:#F0FAF4;border:1px solid #BEE5C8;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2A8A4A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+          </div>
+          <h3 style="font-family:'Merriweather',Georgia,serif;font-size:1.35rem;font-weight:400;color:var(--ink);margin-bottom:10px;">Enquiry received.</h3>
+          <p style="font-size:0.86rem;color:var(--slate);">We'll be in touch within one business day.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer role="contentinfo">
+  <div class="fg2">
+    <div>
+      <!-- LOGO SLOT: replace .flt below with <img src="logo.png" alt="Hobart Electric"> once file is available -->
+      <div class="flt">
+        <span class="a">Hobart Electric</span>
+        <span class="b">Southern Tasmania</span>
+      </div>
+      <p class="ftg">Licensed electrical contractors serving Hobart and Southern Tasmania.</p>
+      <div class="fsoc">
+        <a href="https://www.facebook.com/hobartelectric.com.au/" target="_blank" rel="noopener" aria-label="Facebook" class="fsb">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+        </a>
+        <a href="mailto:info@hobartelectric.com.au" aria-label="Email" class="fsb">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="1"/><path d="M2 4l10 9 10-9"/></svg>
+        </a>
+      </div>
+    </div>
+    <div>
+      <div class="fch">Services</div>
+      <div class="fcl">
+        <a href="#services">Residential</a>
+        <a href="#services">Commercial</a>
+        <a href="#services">EV Chargers</a>
+        <a href="#services">Switchboards</a>
+        <a href="#services">Rural Properties</a>
+        <a href="#services">Lighting</a>
+        <a href="#services">Fault Finding</a>
+      </div>
+    </div>
+    <div>
+      <div class="fch">Service Areas</div>
+      <div class="fcl">
+        <span>Hobart</span>
+        <span>Eastern Shore</span>
+        <span>Sorell &amp; Midway Point</span>
+        <span>Lauderdale</span>
+        <span>Clifton Beach</span>
+        <span>Dodges Ferry</span>
+        <span>Kingston</span>
+        <span>Southern Tasmania</span>
+      </div>
+    </div>
+    <div>
+      <div class="fch">Contact</div>
+      <div class="fcl">
+        <a href="tel:0362310000">(03) 6231 0000</a>
+        <a href="mailto:info@hobartelectric.com.au">info@hobartelectric.com.au</a>
+        <span style="margin-top:10px;padding-top:14px;border-top:1px solid rgba(255,255,255,0.06);line-height:1.9;">
+          Electrical Contractor Licence<br/>
+          State of Tasmania<br/>
+          Lic. No. [insert licence no.]<br/>
+          Public Liability &amp; PI Insured
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="fbot">
+    <span>© 2026 Hobart Electric. All rights reserved.</span>
+    <span>Licensed electrical contractors · Southern Tasmania</span>
+  </div>
+</footer>
+
+<script>
+  // Mobile nav
+  const hbg = document.getElementById('hbg');
+  const mob = document.getElementById('mob');
+  hbg.addEventListener('click', () => { const o = mob.classList.toggle('o'); hbg.setAttribute('aria-expanded', o); });
+  function cm() { mob.classList.remove('o'); hbg.setAttribute('aria-expanded','false'); }
+
+  // Nav shadow
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => nav.classList.toggle('sh', window.scrollY > 60), { passive: true });
+
+  // Scroll reveal
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.1 });
+  document.querySelectorAll('.rv').forEach(el => io.observe(el));
+
+  // Form
+  document.getElementById('qf').addEventListener('submit', e => {
+    e.preventDefault();
+    if (['fn','fp','fs','fd'].some(id => !document.getElementById(id).value.trim())) { alert('Please fill in all required fields.'); return; }
+    document.getElementById('qf').style.display = 'none';
+    document.getElementById('qok').style.display = 'block';
+  });
+</script>
+</body>
+</html>
